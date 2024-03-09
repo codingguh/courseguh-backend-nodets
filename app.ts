@@ -1,17 +1,25 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
-import cors from "cors"
+import express, { Application, Request, Response, NextFunction } from "express";
+import cors from "cors";
 import cookieParser from "cookie-parser";
-import { ErrorMiddleware } from './middleware/error';
-require('dotenv').config();
+import { ErrorMiddleware } from "./middleware/error";
+import userRouter from "./routes/user.route";
+require("dotenv").config();
 
-export const app:Application = express();
+export const app: Application = express();
 
-app.use(express.json({limit:"500mb"}));
+app.use(express.json({ limit: "500mb" }));
+// Use cookie-parser middleware
+app.use(cookieParser());
 
 //cors => cors origin resource sharing
-app.use(cors({
-    origin:process.env.ORIGIN
-}))
+app.use(
+  cors({
+    origin: process.env.ORIGIN,
+  })
+);
+
+//router
+app.use("/api/v1", userRouter);
 
 // testing api
 app.get("/test", (req: Request, res: Response, next: NextFunction) => {
@@ -21,7 +29,6 @@ app.get("/test", (req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-
 // testing api
 app.all("/*", (req: Request, res: Response, next: NextFunction) => {
   const err = new Error(`Route ${req.originalUrl} not found`) as any;
@@ -29,4 +36,4 @@ app.all("/*", (req: Request, res: Response, next: NextFunction) => {
   next(err);
 });
 
-app.use(ErrorMiddleware)
+app.use(ErrorMiddleware);

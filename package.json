@@ -4,12 +4,12 @@
   "description": "",
   "main": "build/server.js",
   "engines": {
-    "node":"18.x"
+    "node": "18.x"
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only server.ts",
-    "start":"node build/server.js",
-    "build":"tsc"
+    "start": "node build/server.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "codingguh",
@@ -25,7 +25,7 @@
     "@types/validator": "^13.7.17",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.39.0",
+    "cloudinary": "^1.41.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
